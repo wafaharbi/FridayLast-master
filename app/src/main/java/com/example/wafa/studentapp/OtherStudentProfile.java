@@ -38,6 +38,7 @@ public class OtherStudentProfile extends AppCompatActivity {
     TextView id ;
     CircleImageView mDisplayImage;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class OtherStudentProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView = (ListView) findViewById(R.id.listInfoStudent);
+
         mDisplayImage = (CircleImageView) findViewById(R.id.settings_image);
 
         final String user_id=   getIntent().getStringExtra("user_id");

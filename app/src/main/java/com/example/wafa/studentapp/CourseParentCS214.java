@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,6 +26,8 @@ public class CourseParentCS214 extends AppCompatActivity {
     DatabaseReference currentRef , studentRef;
     ListView listView ,listView2;
     String username;
+    TextView names;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class CourseParentCS214 extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listInfoStudent);
         listView2 =(ListView) findViewById(R.id.list2);
+        names = (TextView) findViewById(R.id.nameView);
+
 
         auth= FirebaseAuth.getInstance();
         parentUser = auth.getCurrentUser();
@@ -62,6 +67,7 @@ public class CourseParentCS214 extends AppCompatActivity {
                             System.out.println(key+": "+email);
 
                             show(studentSnapshot);
+                            showName(studentSnapshot);
 
                             showAttendance(studentSnapshot);
 
@@ -101,6 +107,17 @@ public class CourseParentCS214 extends AppCompatActivity {
             this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showName(DataSnapshot dataSnapshot){
+        final User user = new User();
+
+        for(DataSnapshot da: dataSnapshot.getChildren()){
+
+            final String name  = user.setName(dataSnapshot.child("name").getValue().toString());
+
+            names.setText(name);
+        }
     }
 
 

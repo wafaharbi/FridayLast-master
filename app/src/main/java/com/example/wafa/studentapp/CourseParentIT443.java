@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,6 +26,7 @@ public class CourseParentIT443 extends AppCompatActivity {
     DatabaseReference currentRef , studentRef;
     ListView listView ,listView2;
     String username;
+    TextView names;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class CourseParentIT443 extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listInfoStudent);
         listView2 =(ListView) findViewById(R.id.list2);
+        names = (TextView) findViewById(R.id.nameView);
 
 
         auth= FirebaseAuth.getInstance();
@@ -63,13 +66,9 @@ public class CourseParentIT443 extends AppCompatActivity {
                             System.out.println(key+": "+email);
 
                             show(studentSnapshot);
-
-
+                            showName(studentSnapshot);
                             showAttendance(studentSnapshot);
 
-                           /* Intent i = new Intent(getApplicationContext(), ParentHome.class);
-                            startActivity(i);
-                            Log.v("*****************" ,"###############");*/
                         }
 
                     }
@@ -84,7 +83,6 @@ public class CourseParentIT443 extends AppCompatActivity {
                 throw databaseError.toException(); // don't ignore errors
             }
         });
-
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -102,6 +100,19 @@ public class CourseParentIT443 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
+
+    public void showName(DataSnapshot dataSnapshot){
+        final User user = new User();
+
+        for(DataSnapshot da: dataSnapshot.getChildren()){
+
+            final String name  = user.setName(dataSnapshot.child("name").getValue().toString());
+
+            names.setText(name);
+        }
+    }
+
     public void showAttendance(DataSnapshot dataSnapshot){
 
         final Attendance attendance = new Attendance();

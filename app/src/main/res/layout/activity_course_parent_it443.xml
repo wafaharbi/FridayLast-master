@@ -41,8 +41,8 @@
         android:layout_marginEnd="116dp"
         android:layout_marginRight="116dp"
         android:layout_toEndOf="@+id/attendance"
-        android:text=""
-        android:textColor="@android:color/background_light"
+        android:text="e- commerce"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="18sp" />
 
 
@@ -69,7 +69,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="9dp"
-        android:textSize="24sp" />
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp" />
 
 
     <ListView

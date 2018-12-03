@@ -19,8 +19,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OtherUsersProfile extends AppCompatActivity {
 
@@ -33,7 +36,7 @@ public class OtherUsersProfile extends AppCompatActivity {
     FirebaseUser u;
     ListView listView;
     Button update;
-    private ImageView mProfileImage;
+    private CircleImageView mProfileImage;
     TextView id ;
 
 
@@ -49,6 +52,8 @@ public class OtherUsersProfile extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listInfoStudent);
 
         final String user_id=   getIntent().getStringExtra("user_id");
+        mProfileImage = (CircleImageView) findViewById(R.id.settings_image);
+
 
         id =(TextView) findViewById(R.id.idProfile);
        // id.setText(user_id);
@@ -94,11 +99,13 @@ public class OtherUsersProfile extends AppCompatActivity {
 
 
             final String name = info.setName(dataSnapshot.child("name").getValue().toString());
+            final String image = dataSnapshot.child("image").getValue().toString();
             //final String username = info.setUsername(dataSnapshot.child("username").getValue().toString());
             final String email = info.setEmail(dataSnapshot.child("email").getValue().toString());
            // final String password = info.setPassword(dataSnapshot.child("password").getValue().toString());
           //  final String phone = info.setPhone(dataSnapshot.child("phone").getValue().toString());
 
+            Picasso.with(OtherUsersProfile.this).load(image).placeholder(R.drawable.default_img).into(mProfileImage);
 
             ArrayList<String> array = new ArrayList<>();
             array.add(name);

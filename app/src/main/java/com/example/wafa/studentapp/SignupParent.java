@@ -253,7 +253,7 @@ public class SignupParent extends AppCompatActivity implements View.OnClickListe
 
                     progressDialog.dismiss();
 
-                    Toast.makeText(getApplicationContext(), "choose different username " , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "your id did not match student, please try agein " , Toast.LENGTH_SHORT).show();
 
                 }
             }

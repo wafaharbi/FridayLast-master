@@ -75,8 +75,6 @@ public class CS383MarkUpdate extends AppCompatActivity {
         final  int f = Integer.parseInt(finalMark);
 
 
-
-
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -94,7 +92,6 @@ public class CS383MarkUpdate extends AppCompatActivity {
                 Toast.makeText(getApplicationContext() , " data was updated" , Toast.LENGTH_SHORT).show();
 
                 CS383MarkUpdate.this.finish();
-
 
             }
 

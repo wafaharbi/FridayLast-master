@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -43,11 +45,11 @@ public class StudentChatTeacher extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         mUserList = (RecyclerView) findViewById(R.id.users_list);
         mUserList.setHasFixedSize(true);
         mUserList.setLayoutManager(new LinearLayoutManager(this));
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Teachers");
+
 
         }
 
@@ -61,8 +63,11 @@ public class StudentChatTeacher extends AppCompatActivity {
     }
 
     @Override
+
     protected void onStart() {
+
         super.onStart();
+
 
         FirebaseRecyclerAdapter<User , StudentChatTeacher.UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, StudentChatTeacher.UserViewHolder>(
                 User.class,

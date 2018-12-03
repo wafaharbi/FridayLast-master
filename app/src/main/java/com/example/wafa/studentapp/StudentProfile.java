@@ -560,14 +560,9 @@ public class StudentProfile extends AppCompatActivity {
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
 
-
-
-
-                final String name = info.setName(dataSnapshot.child("name").getValue().toString());
+            final String name = info.setName(dataSnapshot.child("name").getValue().toString());
 
                 Viewname.setText(name);
-
-           // final String name = info.setName(dataSnapshot.child("name").getValue().toString());
             final String username = info.setUsername(dataSnapshot.child("username").getValue().toString());
             final String email = info.setEmail(dataSnapshot.child("email").getValue().toString());
             final String password = info.setPassword(dataSnapshot.child("password").getValue().toString());
@@ -576,25 +571,18 @@ public class StudentProfile extends AppCompatActivity {
 
             Picasso.with(StudentProfile.this).load(image).placeholder(R.drawable.default_img).into(mDisplayImage);
 
-
             ArrayList<String> array = new ArrayList<>();
-           // array.add(name);
             array.add(username);
             array.add(email);
             array.add(password);
             array.add(phone);
 
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
-
             listView.setAdapter(arrayAdapter);
-
 
             update.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
-
 
                     Intent i = new Intent(getApplicationContext(), StudentUpdateInfo.class);
 
@@ -606,9 +594,6 @@ public class StudentProfile extends AppCompatActivity {
                     startActivity(i);
                 }
             });
-
-
-
 
         }
     }

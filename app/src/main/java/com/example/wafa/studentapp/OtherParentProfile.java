@@ -50,6 +50,7 @@ public class OtherParentProfile extends AppCompatActivity {
         final String user_id=   getIntent().getStringExtra("user_id");
 
         id =(TextView) findViewById(R.id.idProfile);
+        mDisplayImage= (CircleImageView) findViewById(R.id.settings_image);
 
 
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Parents").child(user_id);
@@ -89,11 +90,13 @@ public class OtherParentProfile extends AppCompatActivity {
 
 
             final String name = info.setName(dataSnapshot.child("name").getValue().toString());
-          //  final String username = info.setUsername(dataSnapshot.child("username").getValue().toString());
+            final String image = dataSnapshot.child("image").getValue().toString();
+            //  final String username = info.setUsername(dataSnapshot.child("username").getValue().toString());
             final String email = info.setEmail(dataSnapshot.child("email").getValue().toString());
            // final String password = info.setPassword(dataSnapshot.child("password").getValue().toString());
          //   final String phone = info.setPhone(dataSnapshot.child("phone").getValue().toString());
 
+            Picasso.with(OtherParentProfile.this).load(image).placeholder(R.drawable.default_img).into(mDisplayImage);
 
             ArrayList<String> array = new ArrayList<>();
             array.add(name);
