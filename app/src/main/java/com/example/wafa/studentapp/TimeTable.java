@@ -77,27 +77,34 @@ public class TimeTable extends AppCompatActivity {
     }
     private void loadData() {
         Query query = fNotesDatabase.orderByValue();
-        FirebaseRecyclerAdapter<NoteModel, NoteViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<NoteModel, NoteViewHolder>(
+        //////////  this
+        FirebaseRecyclerAdapter<TimeTableModel, TimeViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<TimeTableModel, TimeViewHolder>(
 
-                NoteModel.class,
+                TimeTableModel.class,
                 R.layout.single_note_layout,
-                NoteViewHolder.class,
+                TimeViewHolder.class,
                 query
 
         ) {
             @Override
-            protected void populateViewHolder(final NoteViewHolder viewHolder, NoteModel model, int position) {
+            protected void populateViewHolder(final TimeViewHolder viewHolder, TimeTableModel model, int position) {
                 final String noteId = getRef(position).getKey();
 
                 fNotesDatabase.child(noteId).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChild("title") && dataSnapshot.hasChild("timestamp")) {
+                        //////// this
+                        if (dataSnapshot.hasChild("title") && dataSnapshot.hasChild("timestamp") && dataSnapshot.hasChild("date")) {
                             String title = dataSnapshot.child("title").getValue().toString();
                             String timestamp = dataSnapshot.child("timestamp").getValue().toString();
 
+                            /// this
+                            String date = dataSnapshot.child("date").getValue().toString();
+
                             viewHolder.setNoteTitle(title);
-                            //viewHolder.setNoteTime(timestamp);
+
+                            ////// this
+                            viewHolder.setNoteDate(date);
 
                             GetTimeAgo getTimeAgo = new GetTimeAgo();
                             viewHolder.setNoteTime(getTimeAgo.getTimeAgo(Long.parseLong(timestamp), getApplicationContext()));
